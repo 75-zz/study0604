@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)file:///C:/Users/k75mi/Downloads/presentation_slides.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フルスクリーンプレゼンテーションスライド</title>
+    <link href="./presentation_slides_files/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./presentation_slides_files/all.min.css">
+    <link href="./presentation_slides_files/css2" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+        .slide {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            page-break-after: always;
+            overflow: hidden;
+        }
+        .placeholder {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-in-out;
+            padding: 0 10%;
+        }
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        .nav-button {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+        .download-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .download-button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+         {
+            .navigation, .download-button {
+                display: none;
+            }
+        }
+    </style>
+<style>
+    .genspark-badge-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .genspark-modal {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 10000;
+      justify-content: end;
+    }
+    
+    .genspark-modal-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 450px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      .genspark-modal-content {
+        max-width: 90%;
+      }
+    }
+    
+    .genspark-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    
+    .genspark-title {
+      margin-bottom: 8px;
+      font-weight: normal;
+      display: inline;
+      font-size: 14px;
+    }
+    
+    .genspark-report {
+      color: #909499;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 14px;
+      display: inline;
+    }
+    
+    .genspark-info {
+      margin: 25px 0;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .genspark-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .genspark-remove-btn {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      color: #333;
+      padding: 4px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex: 1;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
+    .genspark-go-btn {
+      background-color: #222;
+      border: none;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex: 1;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+  </style><style>
+    .genspark-notice-dialog {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .genspark-notice-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      box-sizing: border-box;
+      padding: 10px 30px 30px 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+    }
+
+    .genspark-notice-title {
+      color: #000;
+      font-family: Arial;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+    }
+
+    .genspark-notice-list {
+      margin: 24px 0;
+      
+      color: #606366;
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      padding-left: 12px;
+    }
+
+    .genspark-notice-list li {
+      margin-bottom: 12px;
+      list-style-type: disc;
+    }
+
+    .genspark-notice-list li a {
+      color: #606366;
+      text-decoration: underline;
+    }
+
+    .genspark-notice-checkbox {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      gap: 10px;
+
+      color: #232425;
+
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .genspark-notice-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+      
+    .genspark-notice-ok {
+      color: #232425;
+
+      text-align: center;
+      font-family: Arial;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+
+      cursor: pointer;
+      display: flex;
+      height: 40px;
+      padding: 6px 14px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      width: 100%;
+    }
+  </style><style>
+    .genspark-notice-dialog {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .genspark-notice-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      box-sizing: border-box;
+      padding: 10px 30px 30px 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+    }
+
+    .genspark-notice-title {
+      color: #000;
+      font-family: Arial;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+    }
+
+    .genspark-notice-list {
+      margin: 24px 0;
+      
+      color: #606366;
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      padding-left: 12px;
+    }
+
+    .genspark-notice-list li {
+      margin-bottom: 12px;
+      list-style-type: disc;
+    }
+
+    .genspark-notice-list li a {
+      color: #606366;
+      text-decoration: underline;
+    }
+
+    .genspark-notice-checkbox {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      gap: 10px;
+
+      color: #232425;
+
+      font-family: Arial;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .genspark-notice-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+      
+    .genspark-notice-ok {
+      color: #232425;
+
+      text-align: center;
+      font-family: Arial;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; 
+
+      cursor: pointer;
+      display: flex;
+      height: 40px;
+      padding: 6px 14px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      width: 100%;
+    }
+  </style></head>
+<body>
+    <!-- 表紙 (スライド 1) -->
+    <div id="slide-1" class="slide" style="display: none;">
+        <div class="placeholder">【実際にあったリクエスト】</div>
+        <div class="page-number">1 / 12</div>
+    </div>
+
+    <!-- スライド 2 -->
+    <div id="slide-2" class="slide" style="display: none;">
+        <div class="placeholder">黒ギャルナースの騎乗位をお願いします</div>
+        <div class="page-number">2 / 12</div>
+    </div>
+
+    <!-- スライド 3 -->
+    <div id="slide-3" class="slide" style="display: none;">
+        <div class="placeholder">女の子がバイブやローターで攻められながら挿入される、鷲掴みされた母乳を吹き出しながら中出し・ぶっかけされる</div>
+        <div class="page-number">3 / 12</div>
+    </div>
+
+    <!-- スライド 4 -->
+    <div id="slide-4" class="slide" style="display: none;">
+        <div class="placeholder">メガネが似合うキャリアウーマンが、夜のオフィスでマン拓しながらスカす光景がみたいです。他妄想は数限りないのですが一先ずこの辺で。</div>
+        <div class="page-number">4 / 12</div>
+    </div>
+
+    <!-- スライド 5 -->
+    <div id="slide-5" class="slide" style="display: none;">
+        <div class="placeholder">褐色肌で騎乗位でアへ顔になっている</div>
+        <div class="page-number">5 / 12</div>
+    </div>
+
+    <!-- スライド 6 -->
+    <div id="slide-6" class="slide" style="display: none;">
+        <div class="placeholder">二穴(double penetration)、二穴＋フェラ、ウエディングドレスでの輪姦、スカトロにぶっかけや行為後の雰囲気を追加したもの(特にJK)、爆乳女子の内容の充実(乳房揉まれながらのセックス、下着着衣状態でのセックス、パイズリさせられながらの挿入など)、乳房・乳首いじりの内容の充実(四方から乳房を揉みしだかれたり乳首を引っ張られる)、妊婦の3P
+*片方はバイブやローターでも可</div>
+        <div class="page-number">6 / 12</div>
+    </div>
+
+    <!-- スライド 7 -->
+    <div id="slide-7" class="slide" style="display: none;">
+        <div class="placeholder">女性の下半身に男性が顔を埋めている、または男性の顔に女性が跨っている、トイレで行為に及んでいる、など。</div>
+        <div class="page-number">7 / 12</div>
+    </div>
+
+    <!-- スライド 8 -->
+    <div id="slide-8" class="slide" style="display: none;">
+        <div class="placeholder">ウマ娘等の版権物に似せた物がシークレットで出せれば見てみたくはあります。</div>
+        <div class="page-number">8 / 12</div>
+    </div>
+
+    <!-- スライド 9 -->
+    <div id="slide-9" class="slide" style="display: none;">
+        <div class="placeholder">品名の頭に10文字程度『＊』などの記号を付けてもらいたい（支払いの際に品名の一部が表示されるため）</div>
+        <div class="page-number">9 / 12</div>
+    </div>
+
+    <!-- スライド 10 -->
+    <div id="slide-10" class="slide" style="display: none;">
+        <div class="placeholder">この画風での低年齢(js4～jc2レベル)のスカや黄金水も見てみたい気がします。スタイルが違うかもですが。</div>
+        <div class="page-number">10 / 12</div>
+    </div>
+
+    <!-- スライド 11 -->
+    <div id="slide-11" class="slide" style="display: flex;">
+        <div class="placeholder">金髪青目のような人物が見てみたいです。</div>
+        <div class="page-number">11 / 12</div>
+    </div>
+
+    <!-- スライド 12 -->
+    <div id="slide-12" class="slide" style="display: none;">
+        <div class="placeholder">ああああ</div>
+        <div class="page-number">12 / 12</div>
+    </div>
+
+    <!-- ナビゲーションボタン -->
+    <div class="navigation">
+        <button class="nav-button" id="prev-slide"><i class="fas fa-chevron-left"></i></button>
+        <button class="nav-button" id="next-slide"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+        
+        // 初期表示設定
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(currentSlide);
+        });
+
+        // 次のスライドへ
+        document.getElementById('next-slide').addEventListener('click', function() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+        
+        // 前のスライドへ
+        document.getElementById('prev-slide').addEventListener('click', function() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+        
+        // スライド表示制御
+        function showSlide(slideNumber) {
+            // すべてのスライドを非表示
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                slide.style.display = 'none';
+            }
+            
+            // 指定されたスライドだけを表示
+            const currentSlideElement = document.getElementById(`slide-${slideNumber}`);
+            if (currentSlideElement) {
+                currentSlideElement.style.display = 'flex';
+                
+                // スクロール位置を調整
+                window.scrollTo({
+                    top: currentSlideElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // ナビゲーションボタンの状態更新
+            document.getElementById('prev-slide').disabled = slideNumber === 1;
+            document.getElementById('next-slide').disabled = slideNumber === totalSlides;
+        }
+        
+        // キーボードナビゲーション
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                if (currentSlide < totalSlides) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            } else if (event.key === 'ArrowLeft') {
+                if (currentSlide > 1) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+        });
+        
+    </script>
+
+
+        
+    <script id="html_notice_dialog_script" src="./presentation_slides_files/notice_dialog.js.ダウンロード"></script>
+    </body></html>
